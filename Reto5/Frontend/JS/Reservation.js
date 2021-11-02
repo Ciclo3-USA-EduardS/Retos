@@ -1,4 +1,4 @@
-const endpointRes = "http://150.230.89.106:8080/api/Reservation/all";
+const endpointRes = "http://localhost:8080/api/Reservation/all";
 const etpRes = document.getElementById("informacionRes");
 /** capturar bones decliente */
 const bmostrarRes = document.getElementById("bmostrarRes");
@@ -27,7 +27,7 @@ function peticiongetRes() {
 function peticionpostRes() {
   $.ajax({
     method: "POST",
-    url: "http://150.230.89.106:8080/api/Reservation/save",
+    url: "http://localhost:8080/api/Reservation/save",
     data: capturarReservas(),
     datatype: "json",
     contentType: "application/json",
@@ -43,7 +43,7 @@ function peticionpostRes() {
 function peticionputRes() {
   $.ajax({
     method: "PUT",
-    url: "http://150.230.89.106:8080/api/Reservation/update",
+    url: "http://localhost:8080/api/Reservation/update",
     data: capturarReservas(),
     datatype: "json",
     contentType: "application/json",
@@ -58,7 +58,7 @@ function peticionputRes() {
 function peticionDeleteRes() {
   $.ajax({
     method: "DELETE",
-    url: "http://150.230.89.106:8080/api/Reservation/delete",
+    url: "http://localhost:8080/api/Reservation/delete",
     data: captIdRes(),
     datatype: "json",
     contentType: "application/json",
@@ -71,33 +71,27 @@ function peticionDeleteRes() {
 }
 
 function getReservation(reservas) {
-  let myTable = "<table>";
-  for (i = 0; i < reservas.length; i++) {
-    myTable += "<tr>";
-    myTable +=
+  let registro = "";
+  $.each(reservas, function (index, reservas) {
+    console.log(reservas);
+    registro +=
+      "<tr>" +
       "<td>" +
-      "<strong>idReservation: </strong>" +
-      reservas[i].idReservation +
-      "</td>";
-    myTable +=
+      reservas.idReservation +
+      "</td>" +
       "<td>" +
-      "<strong>startDate: </strong>" +
-      reservas[i].startDate +
-      "</td>";
-      myTable +=
+      reservas.startDate +
+      "</td>" +
       "<td>" +
-      "<strong>devolutionDate: </strong>" +
-      reservas[i].devolutionDate +
-      "</td>";
-      myTable +=
+      reservas.devolutionDate +
+      "</td>" +
       "<td>" +
-      "<strong>status: </strong>" +
-      reservas[i].status +
-      "</td>"; 
-    myTable += "</tr>";
-  }
-  myTable += "</table>";
-  $("#informacionRes").html(myTable);
+      reservas.status +
+      "</td>" +
+      "</tr>";
+  });
+  $("#informacionRes").html(registro);
+
 }
 
 function capturarReservas() {

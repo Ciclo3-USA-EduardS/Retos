@@ -92,7 +92,7 @@ public class ReservationService {
     
    
     
-    public List<Reservation> reporteTiempoServicio (String datoA, String datoB){
+    public List<Reservation> reportTimeService (String datoA, String datoB){
         SimpleDateFormat parser = new SimpleDateFormat ("yyyy-MM-dd");
         
         Date datoUno = new Date();
@@ -111,11 +111,11 @@ public class ReservationService {
         } 
     }
     
-    public List<CountClients> reporteClientesServicio(){
+    public List<CountClients> reportClientService(){
             return operCrud.getClientesRepositorio();
         }
     
-    public StatusReservas reporteStatusServicio (){
+    public StatusReservas reportStatusService (){
         List<Reservation>completed= operCrud.ReservacionStatusRepositorio("completed");
         List<Reservation>cancelled= operCrud.ReservacionStatusRepositorio("cancelled");
         

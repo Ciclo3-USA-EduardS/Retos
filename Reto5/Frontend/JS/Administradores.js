@@ -1,4 +1,4 @@
-const endpointAdm = "http://150.230.89.106:8080/api/Admin/all";
+const endpointAdm = "http://localhost:8080/api/Admin/all";
 const etpAdm = document.getElementById("informacionAdm");
 /** capturar bones decliente */
 const bmostrarAdm = document.getElementById("bmostrarAdm");
@@ -28,7 +28,7 @@ function peticiongetAdm() {
 function peticionpostAdm() {
   $.ajax({
     method: "POST",
-    url: "http://150.230.89.106:8080/api/Admin/save",
+    url: "http://localhost:8080/api/Admin/save",
     data: capturarAdministradores(),
     datatype: "json",
     contentType: "application/json",
@@ -44,7 +44,7 @@ function peticionpostAdm() {
 function peticionputAdm() {
   $.ajax({
     method: "PUT",
-    url: "http://150.230.89.106:8080/api/Admin/update",
+    url: "http://localhost:8080/api/Admin/update",
     data: capturarAdministradores(),
     datatype: "json",
     contentType: "application/json",
@@ -60,7 +60,7 @@ function peticionputAdm() {
 function peticionDeleteAdm() {
   $.ajax({
     method: "DELETE",
-    url: "http://150.230.89.106:8080/api/Admin/delete",
+    url: "http://localhost:8080/api/Admin/delete",
     data: captIdAdm(),
     datatype: "json",
     contentType: "application/json",
@@ -73,21 +73,23 @@ function peticionDeleteAdm() {
 }
 
 function getAdmin(administradores) {
-  let myTable = "<table>";
-  for (i = 0; i < administradores.length; i++) {
-    myTable += "<tr>";
-    myTable +=
-      "<td>" + "<strong>id: </strong>" + administradores[i].id + "</td>";
-    myTable +=
-      "<td>" + "<strong>email: </strong>" + administradores[i].email + "</td>";
-    myTable +=
-      "<td>" + "<strong>password:  </strong>" + administradores[i].password + "</td>";
-    myTable +=
-      "<td>" + "<strong>name:  </strong>" + administradores[i].name + "</td>";
-    myTable += "</tr>";
-  }
-  myTable += "</table>";
-  $("#informacionAdm").html(myTable);
+  let registro = "";
+  $.each(administradores, function (index, administradores) {
+    console.log(administradores);
+    registro +=
+      "<tr>" +
+      "<td>" +
+      administradores.id +
+      "</td>" +
+      "<td>" +
+      administradores.email +
+      "</td>" +
+      "<td>" +
+      administradores.name +
+      "</td>" +
+      "</tr>";
+  });
+  $("#informacionAdm").html(registro);
 }
 
 function capturarAdministradores() {

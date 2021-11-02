@@ -1,4 +1,4 @@
-const endpointCli = "http://150.230.89.106:8080/api/Client/all";
+const endpointCli = "http://localhost:8080/api/Client/all";
 const etpCli = document.getElementById("informacionCli");
 /** capturar bones decliente */
 const bmostrarCli = document.getElementById("bmostrarCli");
@@ -30,7 +30,7 @@ function peticiongetCli() {
 function peticionpostCli() {
   $.ajax({
     method: "POST",
-    url: "http://150.230.89.106:8080/api/Client/save",
+    url: "http://localhost:8080/api/Client/save",
     data: capturarClientes(),
     datatype: "json",
     contentType: "application/json",
@@ -46,7 +46,7 @@ function peticionpostCli() {
 function peticionputCli() {
   $.ajax({
     method: "PUT",
-    url: "http://150.230.89.106:8080/api/Client/update",
+    url: "http://localhost:8080/api/Client/update",
     data: capturarClientes(),
     datatype: "json",
     contentType: "application/json",
@@ -62,7 +62,7 @@ function peticionputCli() {
 function peticionDeleteCli() {
   $.ajax({
     method: "DELETE",
-    url: "http://150.230.89.106:8080/api/Client/delete",
+    url: "http://localhost:8080/api/Client/delete",
     data: captIdCli(),
     datatype: "json",
     contentType: "application/json",
@@ -75,22 +75,27 @@ function peticionDeleteCli() {
 }
 
 function getCliente(clientes) {
-  let myTable = "<table>";
-  for (i = 0; i < clientes.length; i++) {
-    myTable += "<tr>";
-    myTable +=
-      "<td>" + "<strong>idClient: </strong>" + clientes[i].idClient + "</td>";
-    myTable +=
-      "<td>" + "<strong>email: </strong>" + clientes[i].email + "</td>";
-    myTable +=
-      "<td>" + "<strong>password:  </strong>" + clientes[i].password + "</td>";
-    myTable +=
-      "<td>" + "<strong>name:  </strong>" + clientes[i].name + "</td>";
-    myTable += "<td>" + "<strong>age: </strong>" + clientes[i].age + "</td>";
-    myTable += "</tr>";
-  }
-  myTable += "</table>";
-  $("#informacionCli").html(myTable);
+  let registro = "";
+  $.each(clientes, function (index, clientes) {
+    console.log(clientes);
+    registro +=
+      "<tr>" +
+      "<td>" +
+      clientes.idClient +
+      "</td>" +
+      "<td>" +
+      clientes.email +
+      "</td>" +
+      "<td>" +
+      clientes.name +
+      "</td>" +
+      "<td>" +
+      clientes.age +
+      "</td>" +
+      "</tr>";
+  });
+  $("#informacionCli").html(registro);
+
 }
 
 function capturarClientes() {

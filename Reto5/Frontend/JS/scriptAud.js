@@ -1,4 +1,4 @@
-const endpointAud = "http://150.230.89.106:8080/api/Audience/all";
+const endpointAud = "http://localhost:8080/api/Audience/all";
 const etp = document.getElementById("informacionAud");
 /** capturar bones de auditorio */
 const bmostrarAud = document.getElementById("bmostrarAud");
@@ -30,7 +30,7 @@ function peticiongetAud() {
 function peticionpostAud() {
   $.ajax({
     method: "POST",
-    url: "http://150.230.89.106:8080/api/Audience/save",
+    url: "http://localhost:8080/api/Audience/save",
     data: capturarAuditorio(),
     datatype: "json",
     contentType: "application/json",
@@ -46,7 +46,7 @@ function peticionpostAud() {
 function peticionputAud() {
   $.ajax({
     method: "PUT",
-    url: "http://150.230.89.106:8080/api/Audience/update",
+    url: "http://localhost:8080/api/Audience/update",
     data: capturarAuditorio(),
     datatype: "json",
     contentType: "application/json",
@@ -62,7 +62,7 @@ function peticionputAud() {
 function peticionDeleteAud() {
   $.ajax({
     method: "DELETE",
-    url: "http://150.230.89.106:8080/api/Audience/delete",
+    url: "http://localhost:8080/api/Audience/delete",
     data: captIdAud(),
     datatype: "json",
     contentType: "application/json",
@@ -75,29 +75,29 @@ function peticionDeleteAud() {
 }
 
 function getAuditorio(auditorios) {
-  let myTable = "<table>";
-  for (i = 0; i < auditorios.length; i++) {
-    myTable += "<tr>";
-    myTable +=
-      "<td>" + "<strong>id:  </strong>" + auditorios[i].id + "</td>";
-    myTable +=
-      "<td>" + "<strong>name:  </strong>" + auditorios[i].name + "</td>";
-    myTable +=
-      "<td>" + "<strong>owner: </strong>" + auditorios[i].owner + "</td>";
-    myTable +=
+  let registro = "";
+  $.each(auditorios, function (index, auditorios) {
+    console.log(auditorios);
+    registro +=
+      "<tr>" +
       "<td>" +
-      "<strong>capacity:  </strong>" +
-      auditorios[i].capacity +
-      "</td>";
-    myTable +=
+      auditorios.id +
+      "</td>" +
       "<td>" +
-      "<strong>description: </strong>" +
-      auditorios[i].description +
-      "</td>";
-    myTable += "</tr>";
-  }
-  myTable += "</table>";
-  $("#informacionAud").html(myTable);
+      auditorios.name +
+      "</td>" +
+      "<td>" +
+      auditorios.owner +
+      "</td>" +
+      "<td>" +
+      auditorios.capacity +
+      "</td>" +
+      "<td>" +
+      auditorios.description +
+      "</td>" +
+      "</tr>";
+  });
+  $("#informacionAud").html(registro);
 }
 
 function capturarAuditorio() {

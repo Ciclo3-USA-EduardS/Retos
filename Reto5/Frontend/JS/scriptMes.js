@@ -1,4 +1,4 @@
-const endpointMes = "http://150.230.89.106:8080/api/Message/all";
+const endpointMes = "http://localhost:8080/api/Message/all";
 const etpMes = document.getElementById("informacionMes");
 /** capturar bones decliente */
 const bmostrarMes = document.getElementById("bmostrarMes");
@@ -27,7 +27,7 @@ function peticiongetMes() {
 function peticionpostMes() {
   $.ajax({
     method: "POST",
-    url: "http://150.230.89.106:8080/api/Message/save",
+    url: "http://localhost:8080/api/Message/save",
     data: capturarMensajes(),
     datatype: "json",
     contentType: "application/json",
@@ -43,7 +43,7 @@ function peticionpostMes() {
 function peticionputMes() {
   $.ajax({
     method: "PUT",
-    url: "http://150.230.89.106:8080/api/Message/update",
+    url: "http://localhost:8080/api/Message/update",
     data: capturarMensajes(),
     datatype: "json",
     contentType: "application/json",
@@ -59,7 +59,7 @@ function peticionputMes() {
 function peticionDeleteMes() {
   $.ajax({
     method: "DELETE",
-    url: "http://150.230.89.106:8080/api/Message/delete",
+    url: "http://localhost:8080/api/Message/delete",
     data: captIdMes(),
     datatype: "json",
     contentType: "application/json",
@@ -72,22 +72,21 @@ function peticionDeleteMes() {
 }
 
 function getMessage(mensajes) {
-  let myTable = "<table>";
-  for (i = 0; i < mensajes.length; i++) {
-    myTable += "<tr>";
-    myTable +=
+  let registro = "";
+  $.each(mensajes, function (index, mensajes) {
+    console.log(mensajes);
+    registro +=
+      "<tr>" +
       "<td>" +
-      "<strong>idMessage: </strong>" +
-      mensajes[i].idMessage + "</td>";
-    myTable +=
+      mensajes.idMessage +
+      "</td>" +
       "<td>" +
-      "<strong>messageText: </strong>" +
-      mensajes[i].messageText +
-      "</td>";
-    myTable += "</tr>";
-  }
-  myTable += "</table>";
-  $("#informacionMes").html(myTable);
+      mensajes.messageText +
+      "</td>" +
+      "</tr>";
+  });
+  $("#informacionMes").html(registro);
+  
 }
 
 function capturarMensajes() {

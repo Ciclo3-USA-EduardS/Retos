@@ -1,4 +1,4 @@
-const endpointCat = "http://150.230.89.106:8080/api/Category/all";
+const endpointCat = "http://localhost:8080/api/Category/all";
 const etpCat = document.getElementById("informacionCat");
 /** capturar bones de categoria */
 const bmostrarCat = document.getElementById("bmostrarCat");
@@ -28,7 +28,7 @@ function peticiongetCat() {
 function peticionpostCat() {
     $.ajax({
       method: "POST",
-      url: "http://150.230.89.106:8080/api/Category/save",
+      url: "http://localhost:8080/api/Category/save",
       data: capturarcategoria(),
       datatype: "json",
       contentType: "application/json",
@@ -44,7 +44,7 @@ function peticionpostCat() {
   function peticionputCat() {
     $.ajax({
       method: "PUT",
-      url: "http://150.230.89.106:8080/api/Category/update",
+      url: "http://localhost:8080/api/Category/update",
       data: capturarcategoria(),
       datatype: "json",
       contentType: "application/json",
@@ -60,7 +60,7 @@ function peticionpostCat() {
   function peticionDeleteCat() {
     $.ajax({
       method: "DELETE",
-      url:"http://150.230.89.106:8080/api/Category/delete" ,
+      url:"http://localhost:8080/api/Category/delete" ,
       data: captIdCat(),
       datatype: "json",
       contentType: "application/json",
@@ -74,22 +74,24 @@ function peticionpostCat() {
 
 
 function getCategoria(categorias) {
-  let myTable = "<table>";
-  for (i = 0; i < categorias.length; i++) {
-    myTable += "<tr>";
-    myTable +=
-      "<td>" + "<strong> id :</strong> " + categorias[i].id + "</td>";
-    myTable +=
-      "<td>" + "<strong> name :</strong> " + categorias[i].name + "</td>";
-    myTable +=
+  let registro = "";
+  $.each(categorias, function (index, categorias) {
+    console.log(categorias);
+    registro +=
+      "<tr>" +
       "<td>" +
-      "<strong>description  :</strong>  " +
-      categorias[i].description+
-      "</td>";
-    myTable += "</tr>";
-  }
-  myTable += "</table>";
-  $("#informacionCat").html(myTable);
+      categorias.id +
+      "</td>" +
+      "<td>" +
+      categorias.name +
+      "</td>" +
+      "<td>" +
+      categorias.description +
+      "</td>" +
+      "</tr>";
+  });
+  $("#informacionCat").html(registro);
+
 }
 
 function capturarcategoria() {

@@ -70,17 +70,17 @@ public class ReservationController {
 
     @GetMapping("/report-status")
     public StatusReservas getReservas() {
-        return service.reporteStatusServicio();
+        return service.reportStatusService();
     }
 
     @GetMapping("/report-dates/{dateOne}/{dateTwo}")
     public List<Reservation> getReservasTiempo(@PathVariable("dateOne") String dateOne, @PathVariable("dateTwo") String dateTwo) {
-        return service.reporteTiempoServicio(dateOne, dateTwo);
+        return service.reportTimeService(dateOne, dateTwo);
     }
 
     @GetMapping("/report-clients")
     public List<CountClients> getClientes() {
-        return service.reporteClientesServicio();
+        return service.reportClientService();
     }
 
 }
